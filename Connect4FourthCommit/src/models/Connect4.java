@@ -29,16 +29,22 @@ public class Connect4 {
     private void playGame() {
         UtilsView.writeMessage(Message.TITLE);
         BoardView.showBoard(this.board.getColors());
-        // int count = 0;
+        int count = 1;
         do {
             this.turn.play(); // updateHistory IN turn.play -> player.play -> putToken
             do {
                 this.history = this.board.getHistory();
                 this.menuUR.interact(this);
-                // ++count;
+                /*
+                if (this.menuUR.isExecutedUndo) {
+                    ++count;
+                } else if (this.menuUR.isExecutedRedo) {
+                    --count;
+                }
+                 */
             } while (!this.menuUR.isExecutedQuitOption());
             if (!this.isConnectFour()) {
-                this.turn.updateActivePlayer(1/*count*/);
+                this.turn.updateActivePlayer(count);
             }
         } while (!this.isConnectFour() && this.board.boardNotFull());
         if (this.isConnectFour()) {

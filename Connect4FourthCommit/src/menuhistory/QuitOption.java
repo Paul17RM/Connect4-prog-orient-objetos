@@ -2,7 +2,6 @@ package menuhistory;
 
 import models.Connect4;
 import views.BoardView;
-// import views.BoardView;
 
 public class QuitOption extends Option {
     private boolean executed;

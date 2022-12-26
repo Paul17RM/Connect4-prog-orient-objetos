@@ -21,6 +21,16 @@ abstract class QuitMenu extends Menu {
         }
     }
 
+    /*
+    public boolean isExecutedUndo() {
+        return this.options -- undo.isExecuted();
+    }    
+
+    public boolean isExecutedRedo() {
+        return this.options -- redo.isExecuted();
+    }
+     */
+
     public boolean isExecutedQuitOption() {
         return this.quitOption.isExecuted();
     }
