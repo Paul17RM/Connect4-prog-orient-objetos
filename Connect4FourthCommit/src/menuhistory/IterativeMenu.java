@@ -9,9 +9,9 @@ abstract class IterativeMenu extends QuitMenu {
 
     @Override
     public void interact(Connect4 connect) {
+        this.removeOptions();
+        this.addOptions();
         do {
-            this.removeOptions();
-            this.addOptions();
             this.interact_(connect);
         } while (!this.isExecutedQuitOption());
     }

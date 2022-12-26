@@ -17,7 +17,6 @@ public class Connect4 {
 
     private void play() {
         this.menuGM.addOptions();
-        // this.menuUR.addOptions();
         do {
             this.gameMode = this.menuGM.interact();
             if (this.gameMode != null) {
@@ -30,7 +29,7 @@ public class Connect4 {
     private void playGame() {
         UtilsView.writeMessage(Message.TITLE);
         BoardView.showBoard(this.board.getColors());
-        int count = 0;
+        // int count = 0;
         do {
             this.turn.play(); // updateHistory IN turn.play -> player.play -> putToken
             do {

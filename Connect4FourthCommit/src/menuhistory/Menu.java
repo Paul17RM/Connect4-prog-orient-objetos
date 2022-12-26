@@ -17,6 +17,7 @@ abstract class Menu {
     }
 
     public void interact(Connect4 connect) {
+        this.addOptions();
         this.interact_(connect);
     }
 
