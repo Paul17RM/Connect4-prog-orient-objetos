@@ -35,13 +35,11 @@ public class Connect4 {
             do {
                 this.history = this.board.getHistory();
                 this.menuUR.interact(this);
-                /*
-                if (this.menuUR.isExecutedUndo) {
+                if (this.menuUR.isExecutedUndo()) {
                     ++count;
-                } else if (this.menuUR.isExecutedRedo) {
+                } else if (this.menuUR.isExecutedRedo()) {
                     --count;
                 }
-                 */
             } while (!this.menuUR.isExecutedQuitOption());
             if (!this.isConnectFour()) {
                 this.turn.updateActivePlayer(count);

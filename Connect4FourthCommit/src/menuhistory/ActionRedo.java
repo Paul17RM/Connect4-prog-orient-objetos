@@ -13,6 +13,7 @@ public class ActionRedo extends Option {
     @Override
     public void interact(Connect4 connect) {
         connect.getBoard().getHistory().redo(connect);
+        this.executed = true;
     }
 
     protected boolean isExecuted() {

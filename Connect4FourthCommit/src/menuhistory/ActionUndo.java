@@ -13,6 +13,7 @@ public class ActionUndo extends Option {
     @Override
     public void interact(Connect4 connect){
         connect.getBoard().getHistory().undo(connect);
+        this.executed = true;
     }
 
     protected boolean isExecuted() {

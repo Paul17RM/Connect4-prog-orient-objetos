@@ -38,8 +38,7 @@ public class Board {
         this.setToken(coordinate, tokenColor);
         this.latestToken.setRow(coordinate.getPositionRow());
         this.latestToken.setCol(coordinate.getPositionColumn());
-        this.history.updateHistory(
-                new Coordinate(coordinate.getPositionRow(), chosenColumn), tokenColor);
+        this.history.updateHistory(new Coordinate(coordinate.getPositionRow(), chosenColumn), tokenColor);
         BoardView.showBoard(this.colors);
     }
 

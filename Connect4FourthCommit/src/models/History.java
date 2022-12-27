@@ -44,9 +44,8 @@ public class History {
     }
 
     public void redo(Connect4 connect) {
-        if (this.currentIndex < this.movesHistory.size()) {
-            ++this.currentIndex;
-            this.currentToken = this.movesHistory.get(this.currentIndex);
+        if (this.currentIndex < this.movesHistory.size() - 1) {
+            this.currentToken = this.movesHistory.get(++this.currentIndex);
             this.changeTokenColor();
             connect.board.redo(this.currentToken, this.currentColor);
         }
