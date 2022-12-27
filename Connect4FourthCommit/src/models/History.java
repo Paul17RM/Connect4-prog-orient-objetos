@@ -6,12 +6,13 @@ public class History {
     private LinkedList<Coordinate> movesHistory;
     private int currentIndex;
     private Coordinate currentToken;
-    private Color tokenColor;
+    private Color currentColor;
 
     History() {
         this.movesHistory = new LinkedList<>();
         this.currentIndex = 0;
-        this.tokenColor = Color.getColor(0);
+        this.currentToken = new Coordinate(0, 0);
+        this.currentColor = Color.NULL;
     }
 
     int getCurrentIndex() {
@@ -22,28 +23,32 @@ public class History {
         return this.currentToken;
     }
 
-    void setTokenColor(Color tokenColor) {
-        this.tokenColor = tokenColor;
-    }
-
-    void updateHistory(Coordinate latestToken) {
+    void updateHistory(Coordinate latestToken, Color latestColor) {
         this.currentToken = latestToken;
+        this.currentColor = latestColor;
         this.movesHistory.add(this.currentIndex++, latestToken);
     }
 
     // revise
     void changeTokenColor() {
-        this.tokenColor = Color
-                .getColor((this.tokenColor.ordinal() + 1) % Connect4.NUMBER_PLAYERS);
+        this.currentColor = Color
+                .getColor((this.currentColor.ordinal() + 1) % Connect4.NUMBER_PLAYERS);
     }
 
     public void undo(Connect4 connect) {
-        this.currentToken = this.movesHistory.get(--this.currentIndex);
-        connect.board.undo(this.currentToken);
+        if (this.currentIndex > 0) {
+            --this.currentIndex;
+            this.currentToken = this.movesHistory.get(this.currentIndex);
+            connect.board.undo(this.currentToken);
+        }
     }
 
     public void redo(Connect4 connect) {
-        this.currentToken = this.movesHistory.get(++this.currentIndex);
-        // connect.board.redo(this.currentToken, COLOR);
+        if (this.currentIndex < this.movesHistory.size()) {
+            ++this.currentIndex;
+            this.currentToken = this.movesHistory.get(this.currentIndex);
+            this.changeTokenColor();
+            connect.board.redo(this.currentToken, this.currentColor);
+        }
     }
 }

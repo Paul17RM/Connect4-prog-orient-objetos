@@ -38,7 +38,8 @@ public class Board {
         this.setToken(coordinate, tokenColor);
         this.latestToken.setRow(coordinate.getPositionRow());
         this.latestToken.setCol(coordinate.getPositionColumn());
-        this.history.updateHistory(new Coordinate(coordinate.getPositionRow(), chosenColumn));
+        this.history.updateHistory(
+                new Coordinate(coordinate.getPositionRow(), chosenColumn), tokenColor);
         BoardView.showBoard(this.colors);
     }
 
@@ -46,7 +47,7 @@ public class Board {
         this.colors[coordinate.getPositionRow()][coordinate.getPositionColumn()] = Color.NULL;
         BoardView.showBoard(this.colors);
     }
-    
+
     void redo(Coordinate coordinate, Color previousPlayerColor) {
         this.colors[coordinate.getPositionRow()][coordinate.getPositionColumn()] = previousPlayerColor;
         BoardView.showBoard(this.colors);
