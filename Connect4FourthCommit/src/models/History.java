@@ -36,18 +36,17 @@ public class History {
     }
 
     public void undo(Connect4 connect) {
-        if (this.currentIndex > 0) {
-            --this.currentIndex;
-            this.currentToken = this.movesHistory.get(this.currentIndex);
-            connect.board.undo(this.currentToken);
-        }
+        // throw undo not possible exception
+        --this.currentIndex;
+        this.currentToken = this.movesHistory.get(this.currentIndex);
+        this.changeTokenColor();
+        connect.board.undo(this.currentToken);
     }
 
     public void redo(Connect4 connect) {
-        if (this.currentIndex < this.movesHistory.size() - 1) {
-            this.currentToken = this.movesHistory.get(++this.currentIndex);
-            this.changeTokenColor();
-            connect.board.redo(this.currentToken, this.currentColor);
-        }
+        // throw redo not possible exception
+        this.currentToken = this.movesHistory.get(this.currentIndex++);
+        this.changeTokenColor();
+        connect.board.redo(this.currentToken, this.currentColor);
     }
 }

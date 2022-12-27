@@ -42,6 +42,10 @@ public class Board {
         BoardView.showBoard(this.colors);
     }
 
+    private void setToken(Coordinate coordinate, Color color) {
+        this.colors[coordinate.getPositionRow()][coordinate.getPositionColumn()] = color;
+    }
+
     void undo(Coordinate coordinate) {
         this.colors[coordinate.getPositionRow()][coordinate.getPositionColumn()] = Color.NULL;
         BoardView.showBoard(this.colors);
@@ -50,10 +54,6 @@ public class Board {
     void redo(Coordinate coordinate, Color previousPlayerColor) {
         this.colors[coordinate.getPositionRow()][coordinate.getPositionColumn()] = previousPlayerColor;
         BoardView.showBoard(this.colors);
-    }
-
-    private void setToken(Coordinate coordinate, Color color) {
-        this.colors[coordinate.getPositionRow()][coordinate.getPositionColumn()] = color;
     }
 
     private boolean occupiedPosition(Coordinate coordinate) {

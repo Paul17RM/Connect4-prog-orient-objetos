@@ -15,6 +15,10 @@ public class Connect4 {
     private GameMode gameMode;
     Board board = new Board(this.history);
 
+    public static void main(String[] args) {
+        new Connect4().play();
+    }
+
     private void play() {
         this.menuGM.addOptions();
         do {
@@ -68,9 +72,5 @@ public class Connect4 {
 
     public Board getBoard() {
         return this.board;
-    }
-
-    public static void main(String[] args) {
-        new Connect4().play();
     }
 }
