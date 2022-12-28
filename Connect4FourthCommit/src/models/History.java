@@ -29,10 +29,8 @@ public class History {
         this.movesHistory.add(this.currentIndex++, latestToken);
     }
 
-    // revise
     void changeTokenColor() {
-        this.currentColor = Color
-                .getColor((this.currentColor.ordinal() + 1) % Connect4.NUMBER_PLAYERS);
+        this.currentColor = Color.oppositeColor(this.currentColor);
     }
 
     public void undo(Connect4 connect) {

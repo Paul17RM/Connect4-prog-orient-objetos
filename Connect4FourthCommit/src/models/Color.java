@@ -10,6 +10,14 @@ public enum Color {
         return Color.values()[ordinal];
     }
 
+    public static Color oppositeColor(Color prevColor) {
+        if (prevColor == R) {
+            return Y;
+        } else {
+            return R;
+        } 
+    }
+
     public boolean isNull() {
         return this == Color.NULL;
     }
