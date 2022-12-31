@@ -2,48 +2,50 @@ package models;
 
 import java.util.LinkedList;
 
+import utils.Error;
+import views.UtilsView;
+
 public class History {
-    private LinkedList<Coordinate> movesHistory;
+    private LinkedList<Coordinate> gameHistory;
     private int currentIndex;
     private Coordinate currentToken;
     private Color currentColor;
 
     History() {
-        this.movesHistory = new LinkedList<>();
+        this.gameHistory = new LinkedList<Coordinate>();
         this.currentIndex = 0;
         this.currentToken = new Coordinate(0, 0);
         this.currentColor = Color.NULL;
     }
 
-    int getCurrentIndex() {
-        return this.currentIndex;
-    }
-
-    Coordinate getCurrentToken() {
-        return this.currentToken;
-    }
-
     void updateHistory(Coordinate latestToken, Color latestColor) {
         this.currentToken = latestToken;
         this.currentColor = latestColor;
-        this.movesHistory.add(this.currentIndex++, latestToken);
+        this.gameHistory.add(this.currentIndex++, latestToken);
     }
 
     void changeTokenColor() {
-        this.currentColor = Color.oppositeColor(this.currentColor);
+        try {
+            this.currentColor = Color.oppositeColor(this.currentColor);
+        } catch (IllegalArgumentException e) {
+            UtilsView.writeMessageStr(e.getMessage());
+        }
     }
 
     public void undo(Connect4 connect) {
-        // throw undo not possible exception
-        --this.currentIndex;
-        this.currentToken = this.movesHistory.get(this.currentIndex);
+        if (currentIndex <= 0) {
+            throw new IndexOutOfBoundsException(Error.UNVIABLE_UNDO.getMessage());
+        }
+        this.currentToken = this.gameHistory.get(--this.currentIndex);
         this.changeTokenColor();
         connect.board.undo(this.currentToken);
     }
 
     public void redo(Connect4 connect) {
-        // throw redo not possible exception
-        this.currentToken = this.movesHistory.get(this.currentIndex++);
+        if (currentIndex >= this.gameHistory.size()) {
+            throw new IndexOutOfBoundsException(Error.UNVIABLE_REDO.getMessage());
+        }
+        this.currentToken = this.gameHistory.get(this.currentIndex++);
         this.changeTokenColor();
         connect.board.redo(this.currentToken, this.currentColor);
     }

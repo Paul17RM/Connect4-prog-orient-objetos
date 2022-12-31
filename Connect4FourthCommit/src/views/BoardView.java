@@ -6,7 +6,8 @@ import utils.Message;
 
 public class BoardView {
     public static void showBoard(Color[][] colors) {
-        UtilsView.writeMessage(Message.HORIZONTAL_LINE);
+        UtilsView.writeMessageMsg(Message.HORIZONTAL_LINE);
+        UtilsView.writeMessageStr("\n");
         for (int i = Coordinate.ROWS - 1; i >= 0; i--) {
             for (int j = 0; j < Coordinate.COLS; j++) {
                 if (colors[i][j].isNull()) {
@@ -15,8 +16,8 @@ public class BoardView {
                     System.out.print("|\t" + colors[i][j] + "\t");
                 }
             }
-            System.out.print("|\n");
+            UtilsView.writeMessageStr("|\n");
         }
-        UtilsView.writeMessage(Message.HORIZONTAL_LINE);
+        UtilsView.writeMessageMsg(Message.HORIZONTAL_LINE);
     }
 }

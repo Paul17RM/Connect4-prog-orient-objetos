@@ -1,5 +1,6 @@
 package models;
 
+import utils.Error;
 import views.BoardView;
 
 public class Board {
@@ -9,9 +10,9 @@ public class Board {
 
     Board(History history) {
         this.colors = new Color[Coordinate.ROWS][Coordinate.COLS];
+        this.reset();
         this.latestToken = new Coordinate(0, 0);
         this.history = history;
-        this.reset();
     }
 
     void reset() {
@@ -22,16 +23,19 @@ public class Board {
         }
     }
 
-    public Color[][] getColors() {
+    public Color[][] getColors() { // public <- used in one menu QuitOption
         return colors;
     }
 
-    public History getHistory() {
+    public History getHistory() { // publi <- used in Undo & Redo menu actions
         return this.history;
     }
 
     void putToken(int chosenColumn, Color tokenColor) {
         Coordinate coordinate = new Coordinate(0, chosenColumn);
+        if (!this.columnIsFree(coordinate.getPositionColumn())) {
+            throw new IllegalArgumentException(Error.COLUMN_IS_FULL.getMessage());
+        }
         while (this.occupiedPosition(coordinate)) {
             coordinate.setRow(coordinate.getPositionRow() + 1);
         }
@@ -43,20 +47,26 @@ public class Board {
     }
 
     private void setToken(Coordinate coordinate, Color color) {
+        if (Coordinate.isOutOfBounds(coordinate)) {
+            throw new IndexOutOfBoundsException(Error.OUT_OF_BOUNDS.getMessage());
+        }
         this.colors[coordinate.getPositionRow()][coordinate.getPositionColumn()] = color;
     }
 
     void undo(Coordinate coordinate) {
         this.colors[coordinate.getPositionRow()][coordinate.getPositionColumn()] = Color.NULL;
         BoardView.showBoard(this.colors);
-    }
+    } // <- call from History <- call from ActionUndo
 
     void redo(Coordinate coordinate, Color previousPlayerColor) {
         this.colors[coordinate.getPositionRow()][coordinate.getPositionColumn()] = previousPlayerColor;
         BoardView.showBoard(this.colors);
-    }
+    } // <- call from History <- call from ActionRedo
 
     private boolean occupiedPosition(Coordinate coordinate) {
+        if (Coordinate.isOutOfBounds(coordinate)) {
+            throw new IndexOutOfBoundsException(Error.OUT_OF_BOUNDS.getMessage());
+        }
         return !this.colors[coordinate.getPositionRow()][coordinate.getPositionColumn()].isNull();
     }
 

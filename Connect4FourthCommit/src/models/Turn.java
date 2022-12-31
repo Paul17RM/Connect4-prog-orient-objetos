@@ -9,9 +9,13 @@ class Turn {
         this.reset(players);
     }
 
+    void reset(Player[] players) {
+        this.players = players.clone();
+        this.activePlayer = 0;
+    }
+
     void play() {
         this.players[this.activePlayer].play();
-        // turn change (moved to main)
     }
 
     void writeWinner() {
@@ -22,18 +26,7 @@ class Turn {
         return this.players[this.activePlayer].getPlayerColor();
     }
 
-    // uses?
-    int getActivePlayer() {
-        return this.activePlayer;
-    }
-
-    // @TODO
     void updateActivePlayer(int count) {
         this.activePlayer = (this.activePlayer + count) % Connect4.NUMBER_PLAYERS;
-    }
-
-    void reset(Player[] players) {
-        this.players = players.clone();
-        this.activePlayer = 0;
     }
 }

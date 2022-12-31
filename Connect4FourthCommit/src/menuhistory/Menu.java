@@ -1,11 +1,12 @@
 package menuhistory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.Connect4;
 import utils.Console;
 import views.MenusView;
-
-import java.util.ArrayList;
-import java.util.List;
+import views.UtilsView;
 
 abstract class Menu {
     private String title;
@@ -34,7 +35,7 @@ abstract class Menu {
         for (int i = 0; i < this.options.size(); i++) {
             this.options.get(i).showTitle(i + 1);
         }
-        System.out.println();
+        UtilsView.writeMessageStr("\n");
     }
 
     private void showTitle() {
@@ -42,7 +43,7 @@ abstract class Menu {
         for (int i = 0; i < this.title.length(); i++) {
             string += "-";
         }
-        Console.getInstance().writeStr(string);
+        UtilsView.writeMessageStr(string);
     }
 
     protected void execChooseOption(Connect4 connect) {

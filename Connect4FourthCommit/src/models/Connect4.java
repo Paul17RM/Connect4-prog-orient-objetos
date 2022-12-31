@@ -31,7 +31,7 @@ public class Connect4 {
     }
 
     private void playGame() {
-        UtilsView.writeMessage(Message.TITLE);
+        UtilsView.writeMessageMsg(Message.TITLE);
         BoardView.showBoard(this.board.getColors());
         int count = 1;
         do {
@@ -45,14 +45,20 @@ public class Connect4 {
                     --count;
                 }
             } while (!this.menuUR.isExecutedQuitOption());
-            if (!this.isConnectFour()) {
+
+            /*
+             * one can UNDO at the cost of losing their turn, but if they REDO right afer,
+             * that is equivalent to doing NO ACTION, thus turn has not been lost.
+             */
+
+            if (!this.isConnectFour() && count % 2 != 0) {
                 this.turn.updateActivePlayer(count);
             }
         } while (!this.isConnectFour() && this.board.boardNotFull());
         if (this.isConnectFour()) {
             this.turn.writeWinner();
         } else if (!this.board.boardNotFull()) {
-            UtilsView.writeMessage(Message.TIE);
+            UtilsView.writeMessageMsg(Message.TIE);
         }
     }
 

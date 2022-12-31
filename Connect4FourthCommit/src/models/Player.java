@@ -1,5 +1,7 @@
 package models;
 
+import java.util.InputMismatchException;
+
 import utils.Message;
 import views.UtilsView;
 
@@ -8,16 +10,16 @@ public abstract class Player {
     protected Board board;
 
     public Player(Color color, Board board) {
-        // EXCEPTION HERE!!
-        // assert !color.isNull();
-
-        // assert board != null;
         this.playerColor = color;
         this.board = board;
     }
 
     void writeWinner() {
-        UtilsView.writeWinner(Message.VICTORY, this.playerColor.name());
+        try {
+            UtilsView.writeWinner(Message.VICTORY, this.playerColor.name());
+        } catch (InputMismatchException e) {
+            UtilsView.writeMessageStr(e.getMessage());
+        }
     }
 
     Color getPlayerColor() {
