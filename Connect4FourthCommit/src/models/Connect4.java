@@ -35,7 +35,7 @@ public class Connect4 {
         BoardView.showBoard(this.board.getColors());
         int count = 1;
         do {
-            this.turn.play(); // updateHistory IN turn.play -> player.play -> putToken
+            this.turn.play();
             do {
                 this.history = this.board.getHistory();
                 this.menuUR.interact(this);
@@ -45,11 +45,6 @@ public class Connect4 {
                     --count;
                 }
             } while (!this.menuUR.isExecutedQuitOption());
-
-            /*
-             * one can UNDO at the cost of losing their turn, but if they REDO right afer,
-             * that is equivalent to doing NO ACTION. thus, turn is not lost.
-             */
 
             if (!this.isConnectFour() && count % 2 != 0) {
                 this.turn.updateActivePlayer(count);

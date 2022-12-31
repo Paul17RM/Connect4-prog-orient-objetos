@@ -23,11 +23,11 @@ public class Board {
         }
     }
 
-    public Color[][] getColors() { // public <- used in one menu QuitOption
+    public Color[][] getColors() {
         return colors;
     }
 
-    public History getHistory() { // publi <- used in Undo & Redo menu actions
+    public History getHistory() {
         return this.history;
     }
 
@@ -56,12 +56,12 @@ public class Board {
     void undo(Coordinate coordinate) {
         this.colors[coordinate.getPositionRow()][coordinate.getPositionColumn()] = Color.NULL;
         BoardView.showBoard(this.colors);
-    } // <- call from History <- call from ActionUndo
+    }
 
     void redo(Coordinate coordinate, Color previousPlayerColor) {
         this.colors[coordinate.getPositionRow()][coordinate.getPositionColumn()] = previousPlayerColor;
         BoardView.showBoard(this.colors);
-    } // <- call from History <- call from ActionRedo
+    }
 
     private boolean occupiedPosition(Coordinate coordinate) {
         if (Coordinate.isOutOfBounds(coordinate)) {
