@@ -1,7 +1,7 @@
 package utils;
 
 public enum Message {
-    TITLE("----- Connect 4 -----"),
+    TITLE("----- Connect 4 -----\n"),
     HORIZONTAL_LINE("----------------------------------------------------------------------------------"),
     TIE("It's a tie, neither player has won :("),
     VICTORY("Player #player you win!!!!!!"),

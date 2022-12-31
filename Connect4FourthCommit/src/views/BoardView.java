@@ -19,5 +19,6 @@ public class BoardView {
             UtilsView.writeMessageStr("|\n");
         }
         UtilsView.writeMessageMsg(Message.HORIZONTAL_LINE);
+        UtilsView.writeMessageStr("\n");
     }
 }

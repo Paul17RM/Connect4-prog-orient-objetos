@@ -48,13 +48,14 @@ public class Connect4 {
 
             /*
              * one can UNDO at the cost of losing their turn, but if they REDO right afer,
-             * that is equivalent to doing NO ACTION, thus turn has not been lost.
+             * that is equivalent to doing NO ACTION. thus, turn is not lost.
              */
 
             if (!this.isConnectFour() && count % 2 != 0) {
                 this.turn.updateActivePlayer(count);
             }
         } while (!this.isConnectFour() && this.board.boardNotFull());
+
         if (this.isConnectFour()) {
             this.turn.writeWinner();
         } else if (!this.board.boardNotFull()) {

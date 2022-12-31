@@ -1,13 +1,13 @@
 package utils;
 
 public enum Error {
-    OUT_OF_BOUNDS("Coordinate is out of bounds."),
-    COLUMN_IS_FULL("Column has no empty squares left."),
-    UNVIABLE_UNDO("Undo action was not possible."),
-    UNVIABLE_REDO("Redo action was not possible."),
-    COLOR_NULL("Color is null."),
-    ILLEGAL_COLOR("Unaccounted color."),
-    NO_WINNER("There is no winner as of yet."),
+    OUT_OF_BOUNDS("\nCoordinate is out of bounds.\n"),
+    COLUMN_IS_FULL("\nColumn has no empty squares left.\n"),
+    UNVIABLE_UNDO("\nUndo action was not possible.\n"),
+    UNVIABLE_REDO("\nRedo action was not possible.\n"),
+    COLOR_NULL("\nColor is null.\n"),
+    ILLEGAL_COLOR("\nUnaccounted color.\n"),
+    NO_WINNER("\nThere is no winner as of yet.\n"),
     NULL;
 
     private String message;
