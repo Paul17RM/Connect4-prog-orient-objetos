@@ -1,4 +1,4 @@
-# ConnectFour | fourth submission v2
+# ConnectFour | fourth submission
 
 Fourth issue of the assignment.
 
