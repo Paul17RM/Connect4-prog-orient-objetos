@@ -24,7 +24,7 @@ public class Connect4 {
         do {
             this.gameMode = this.menuGM.interact();
             if (this.gameMode != null) {
-                this.turn = new Turn(gameMode.initialize(this.board));
+                this.turn = new Turn(this.board, gameMode.initialize(this.board));
                 this.playGame();
             }
         } while (!this.menuGM.isExecutedQuitOption() && this.startAnotherGame());
@@ -33,22 +33,12 @@ public class Connect4 {
     private void playGame() {
         UtilsView.writeMessageMsg(Message.TITLE);
         BoardView.showBoard(this.board.getColors());
-        int count = 1;
         do {
             this.turn.play();
             do {
                 this.history = this.board.getHistory();
                 this.menuUR.interact(this);
-                if (this.menuUR.isExecutedUndo()) {
-                    ++count;
-                } else if (this.menuUR.isExecutedRedo()) {
-                    --count;
-                }
             } while (!this.menuUR.isExecutedQuitOption());
-
-            if (!this.isConnectFour() && count % 2 != 0) {
-                this.turn.updateActivePlayer(count);
-            }
         } while (!this.isConnectFour() && this.board.boardNotFull());
 
         if (this.isConnectFour()) {

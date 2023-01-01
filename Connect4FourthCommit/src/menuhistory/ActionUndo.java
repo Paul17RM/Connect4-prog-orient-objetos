@@ -4,11 +4,8 @@ import models.Connect4;
 import views.UtilsView;
 
 public class ActionUndo extends Option {
-    private boolean executed;
-
     ActionUndo() {
         super("Undo");
-        this.executed = false;
     }
 
     @Override
@@ -18,14 +15,5 @@ public class ActionUndo extends Option {
         } catch (IndexOutOfBoundsException e) {
             UtilsView.writeMessageStr(e.getMessage());
         }
-        this.executed = true;
-    }
-
-    protected boolean isExecuted() {
-        return this.executed;
-    }
-
-    protected void resetUndoOption() {
-        this.executed = false;
     }
 }
