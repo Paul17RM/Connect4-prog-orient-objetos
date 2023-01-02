@@ -23,7 +23,7 @@ public class Connect4 {
         this.menuGM.addOptions();
         do {
             this.gameMode = this.menuGM.interact();
-            if (this.gameMode != null) {
+            if (!this.menuGM.isExecutedQuitOption()) {
                 this.turn = new Turn(this.board, gameMode.initialize(this.board));
                 this.playGame();
                 this.board.getHistory().resetHistory();
