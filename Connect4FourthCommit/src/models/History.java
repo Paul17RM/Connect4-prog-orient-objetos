@@ -24,6 +24,11 @@ public class History {
         this.gameHistory.add(this.currentIndex++, latestToken);
     }
 
+    void resetHistory() {
+        this.gameHistory.clear();
+        this.currentIndex = 0;
+    }
+
     void changeTokenColor() {
         try {
             this.currentColor = Color.oppositeColor(this.currentColor);
